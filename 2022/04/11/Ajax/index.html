@@ -1,0 +1,482 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ajax基础 | Jessica☞博客</title><meta name="keywords" content="Ajax"><meta name="author" content="Jessica"><meta name="copyright" content="Jessica"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="记录学习前端+黑马网课+项目实操">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax基础">
+<meta property="og:url" content="https://jessica-ling12.github.io/2022/04/11/Ajax/index.html">
+<meta property="og:site_name" content="Jessica☞博客">
+<meta property="og:description" content="记录学习前端+黑马网课+项目实操">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s4.ax1x.com/2021/12/23/T8TCM8.jpg">
+<meta property="article:published_time" content="2022-04-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-25T05:40:20.910Z">
+<meta property="article:author" content="Jessica">
+<meta property="article:tag" content="Ajax">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s4.ax1x.com/2021/12/23/T8TCM8.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jessica-ling12.github.io/2022/04/11/Ajax/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?52d45916f6dcbf13778e634b266a8fed";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Ajax基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-25 13:40:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/05/oD4Zk9.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页🙋‍♀️</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章📄</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签🗨</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类♻</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐🎉</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐🎶</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影🎞</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接🤝</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About👩</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s4.ax1x.com/2021/12/23/T8TCM8.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Jessica☞博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页🙋‍♀️</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章📄</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签🗨</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类♻</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐🎉</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐🎶</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影🎞</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接🤝</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About👩</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Ajax基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-10T16:00:00.000Z" title="发表于 2022-04-11 00:00:00">2022-04-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-25T05:40:20.910Z" title="更新于 2022-06-25 13:40:20">2022-06-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Ajax/">Ajax</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Ajax基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="2022-4-11"><a href="#2022-4-11" class="headerlink" title="2022.4.11"></a>2022.4.11</h2><p>· 服务器：上网过程中，负责<strong>存放和对外提供资源</strong>的电脑。</p>
+<p>· 客户端：上网过程中，负责<strong>获取和消费资源</strong>的电脑。</p>
+<p>· URL（统一资源定位符）：用于识别互联网上每个资源的唯一存放位置。</p>
+<p>（1）客户端与服务器之间的<strong>通信协议</strong></p>
+<p>（2）存有该资源的<strong>服务器名称</strong></p>
+<p>（3）资源在服务器上<strong>具体的存放位置</strong><a target="_blank" rel="noopener" href="https://imgtu.com/i/LZlYCt"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZlYCt.png" alt="LZlYCt.png"></a></p>
+<p>· 客户端与服务器的通信过程：请求 - 处理 - 响应<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZlUv8"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZlUv8.png" alt="LZlUv8.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/LZlNgf"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZlNgf.png" alt="LZlNgf.png"></a></p>
+<p>· （数据是资源）资源的请求方式：</p>
+<p>（1）get请求用于获取服务端资源（向服务器要资源）</p>
+<p>（2）post请求用于向服务器提交数据（往服务器发送资源）</p>
+<p>· XMLHttpRequest（xhl）：是浏览器提供的js成员，通过它可以请求服务器上的数据资源。数据交互</p>
+<p>· Ajax（异步JavaScript和XML）：在网页中利用XMLHttpRequest对象和服务器进行数据交互的方式</p>
+<p>· jQuery中发起Ajax请求常用的三个方法：$.get();  $.post();   $.ajax();</p>
+<p>（1）$.get()：专门用来发起get请求，从而将服务器上的资源请求到客户端来进行使用。<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZlG4I"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZlG4I.png" alt="LZlG4I.png"></a></p>
+<p>-》$.get()发起不带参数的请求：<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZlwDg"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZlwDg.png" alt="LZlwDg.png"></a></p>
+<p>-》$.get()发起带参数的请求：<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZlt8P"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZlt8P.png" alt="LZlt8P.png"></a></p>
+<p>（2）$.post()：专门用来发起post请求，从而向服务器提交数据。<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZldKS"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZldKS.png" alt="LZldKS.png"></a></p>
+<p>-》$.post()向服务器提交数据：<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZlDEj"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZlDEj.png" alt="LZlDEj.png"></a></p>
+<p>（3）$.ajax()：对Ajax请求进行更详细的配置；<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZl0bQ"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZl0bQ.png" alt="LZl0bQ.png"></a></p>
+<p>-》$.ajax()发起get请求：<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZlc80"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZlc80.png" alt="LZlc80.png"></a></p>
+<p>-》$.ajax()发起post请求：<a target="_blank" rel="noopener" href="https://imgtu.com/i/LZl6Cq"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/11/LZl6Cq.png" alt="LZl6Cq.png"></a></p>
+<h2 id="2022-4-12"><a href="#2022-4-12" class="headerlink" title="2022.4.12"></a>2022.4.12</h2><p>· 接口：使用Ajax请求数据时，被请求的URL地址。每个接口必须有请求方式。)</p>
+<p>· 接口测试工具：PostMan</p>
+<p>· 接口文档：[<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQVpod.png" alt="LQVpod.png">](<a target="_blank" rel="noopener" href="https://imgtu.com/i/LQVpod">https://imgtu.com/i/LQVpod</a></p>
+<p>· form表单负责数据采集功能。</p>
+<p>（1）表单标签：<strong>form</strong>（2）表单域（input）：文本框、密码框、隐藏框、多行文本框等 （3）表单按钮（button）</p>
+<p>· form标签属性：<a target="_blank" rel="noopener" href="https://imgtu.com/i/LQAJ3V"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQAJ3V.png" alt="LQAJ3V.png"></a></p>
+<p>（1）action：用来规定当提交表单时，向何处发送表单数据<a target="_blank" rel="noopener" href="https://imgtu.com/i/LQVmwQ"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQVmwQ.png" alt="LQVmwQ.png"></a></p>
+<p>（2）target：用来规定在何处打开action URL<a target="_blank" rel="noopener" href="https://imgtu.com/i/L1wZB8"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1wZB8.png" alt="L1wZB8.png"></a></p>
+<p>（3）method：用来规定以何种方式把表单数据提交到action URL <a target="_blank" rel="noopener" href="https://imgtu.com/i/LQVQWq"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQVQWq.png" alt="LQVQWq.png"></a></p>
+<p>（4）enctype：用来规定发送表单数据之前如何对数据进行编码<a target="_blank" rel="noopener" href="https://imgtu.com/i/LQAdHJ"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQAdHJ.png" alt="LQAdHJ.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/LQAs9x"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQAs9x.png" alt="LQAs9x.png"></a></p>
+<h2 id="2022-4-13"><a href="#2022-4-13" class="headerlink" title="2022.4.13"></a>2022.4.13</h2><p>· 表单的同步提交：通过点击submit按钮，触发表单提交的操作，从而使页面跳转到action URL的行为<a target="_blank" rel="noopener" href="https://imgtu.com/i/LQA2uD"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQA2uD.png" alt="LQA2uD.png"></a></p>
+<p>· 通过Ajax提交表单数据：</p>
+<p>（1）监听表单提交事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$(&#x27;#forml&#x27;).submit(function(e)&#123;</span><br><span class="line">	alert(&#x27;监听到了表单的提交事件&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$(&#x27;#forml&#x27;).on(&#x27;submit&#x27;,function(e)&#123;</span><br><span class="line">	alert(&#x27;监听到了表单的提交事件&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>(2)阻止表单默认提交行为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$(&#x27;#forml&#x27;).submit(function(e)&#123;</span><br><span class="line">	e.preventDefault()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$(&#x27;#forml&#x27;).on(&#x27;submit&#x27;,function(e)&#123;</span><br><span class="line">e.preventDefault()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>(3)快速获取表单中的数据：<a target="_blank" rel="noopener" href="https://imgtu.com/i/LQAWHH"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQAWHH.png" alt="LQAWHH.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/LQA54I"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/13/LQA54I.png" alt="LQA54I.png"></a></p>
+<p>· 模板引擎：可根据程序员指定的模板结构和数据，自动生成一个完整的HTML页面</p>
+<p>art-template模板引擎：<a target="_blank" rel="noopener" href="http://aui.github.io/art-template/zh-cn/index.html">http://aui.github.io/art-template/zh-cn/index.html</a></p>
+<p>下载：<a target="_blank" rel="noopener" href="http://aui.github.io/art-template/zh-cn/docs/installation.html[![L1hR3V.png](https://s1.ax1x.com/2022/04/14/L1hR3V.png)](https://imgtu.com/i/L1hR3V)">http://aui.github.io/art-template/zh-cn/docs/installation.html[![L1hR3V.png](https://s1.ax1x.com/2022/04/14/L1hR3V.png)](https://imgtu.com/i/L1hR3V)</a></p>
+<p>· art模板引擎标准语法：<a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hfjU"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hfjU.png" alt="L1hfjU.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hchq"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hchq.png" alt="L1hchq.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1h4uF"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1h4uF.png" alt="L1h4uF.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1h290"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1h290.png" alt="L1h290.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1h5B4"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1h5B4.png" alt="L1h5B4.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hIHJ"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hIHJ.png" alt="L1hIHJ.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hTE9"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hTE9.png" alt="L1hTE9.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hH41"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hH41.png" alt="L1hH41.png"></a></p>
+<h2 id="2022-4-14"><a href="#2022-4-14" class="headerlink" title="2022.4.14"></a>2022.4.14</h2><p>· 正则表达式与字符串操作：<a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hq9x"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hq9x.png" alt="L1hq9x.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hL36"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hL36.png" alt="L1hL36.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hOgK"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hOgK.png" alt="L1hOgK.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hXjO"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hXjO.png" alt="L1hXjO.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hvuD"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hvuD.png" alt="L1hvuD.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hxDe"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hxDe.png" alt="L1hxDe.png"></a></p>
+<p>· 正则-实现简易的模板引擎：<a target="_blank" rel="noopener" href="https://imgtu.com/i/L1hzHH"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L1hzHH.png" alt="L1hzHH.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L14pEd"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L14pEd.png" alt="L14pEd.png"></a></p>
+<p>· XMLHttpRequest的概念：<a target="_blank" rel="noopener" href="https://imgtu.com/i/L14F8P"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L14F8P.png" alt="L14F8P.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L149UA"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L149UA.png" alt="L149UA.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L14C4I"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L14C4I.png" alt="L14C4I.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L14kgf"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L14kgf.png" alt="L14kgf.png"></a></p>
+<p>· XMLHttpRequest的基本使用：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/L14iCt"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/14/L14iCt.png" alt="L14iCt.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L8E2sx"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/15/L8E2sx.png" alt="L8E2sx.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L8ERL6"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/15/L8ERL6.png" alt="L8ERL6.png"></a><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/9e3554662188b7e25b4cd5b3b132f743.png" alt="9e3554662188b7e25b4cd5b3b132f743.png"><a target="_blank" rel="noopener" href="https://imgtu.com/i/L8E6zR"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/15/L8E6zR.png" alt="L8E6zR.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/L8EhdO"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/15/L8EhdO.png" alt="L8EhdO.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L8EoJH"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/15/L8EoJH.png" alt="L8EoJH.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/L8E4oD"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/15/L8E4oD.png" alt="L8E4oD.png"></a><a target="_blank" rel="noopener" href="https://imgtu.com/i/L8EIFe"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/15/L8EIFe.png" alt="L8EIFe.png"></a></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/70c23e807074cecdc2f673c4fce6800e.png" alt="70c23e807074cecdc2f673c4fce6800e.png"><a target="_blank" rel="noopener" href="https://imgtu.com/i/L8EfeK"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s1.ax1x.com/2022/04/15/L8EfeK.png" alt="L8EfeK.png"></a></p>
+<h2 id="2022-4-15"><a href="#2022-4-15" class="headerlink" title="2022.4.15"></a>2022.4.15</h2><p>· 数据交换格式：服务器端与客户端之间进行数据传输与交换的格式。前端中常用XML和JSON。</p>
+<p>· XML：可扩展标记语言。用来传输和存储数据。</p>
+<p>· JSON：是JavaScript对象和数组的字符串表示法，它使用文本表示一个JS对象或数组的信息，so，<strong>JSON的本质是字符串</strong>。是一种轻量级的文本数据交换格式。</p>
+<p>-》两种结构：对象结构和数组结构<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/16e78b3571028f622e17702e9e6c7870.png" alt="16e78b3571028f622e17702e9e6c7870.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/280b81700118d870e9ed43ee6fefdaf7.png" alt="280b81700118d870e9ed43ee6fefdaf7.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/1fe4754e555e0cbdbae0ec33b4a26e75.png" alt="1fe4754e555e0cbdbae0ec33b4a26e75.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/7a7b69ce5cd11fd94720682a43264219.png" alt="7a7b69ce5cd11fd94720682a43264219.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/6e0ea25946998b6f7f119e04e14bbc0b.png" alt="6e0ea25946998b6f7f119e04e14bbc0b.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/b3145f7cc5175952dd1437c13e23b9be.png" alt="b3145f7cc5175952dd1437c13e23b9be.png"></p>
+<p>· 封装自己的Ajax函数：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/e8211323a099e419aeedbb23d477f5a4.png" alt="e8211323a099e419aeedbb23d477f5a4.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/4f4ead26c407e57a1f1d22a4345533a5.png" alt="4f4ead26c407e57a1f1d22a4345533a5.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/6103cfeea16c70e28609245d5d348be8.png" alt="6103cfeea16c70e28609245d5d348be8.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/c590ca55a2b4df07689df31fa43f29f6.png" alt="c590ca55a2b4df07689df31fa43f29f6.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/2066ab24599a449422456e49acb574bd.png" alt="2066ab24599a449422456e49acb574bd.png"></p>
+<p>· XMLHttpRequest Level2新特性：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/10e7c3b6ccb798bf3129f24eedb0f167.png" alt="10e7c3b6ccb798bf3129f24eedb0f167.png"></p>
+<p>· 设置HTTP请求时限：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/db0dacd635c41d9a10971028dfb826e1.png" alt="db0dacd635c41d9a10971028dfb826e1.png"></p>
+<p>· FormData对象的使用：俩种方法<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/23a394167b69b117aabec6fc4813dcbe.png" alt="23a394167b69b117aabec6fc4813dcbe.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/25bac7c539582cb01ade7d64c8f935a5.png" alt="25bac7c539582cb01ade7d64c8f935a5.png"></p>
+<p>· 选择文件并追加到FormData中：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/dc8a0adfb9297336d5e0218ebf1fc4e6.png" alt="dc8a0adfb9297336d5e0218ebf1fc4e6.png"></p>
+<p>· 实现上传文件的功能：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/9354540f5a0d35d685a397199e6a3690.png" alt="9354540f5a0d35d685a397199e6a3690.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/b1c7bbd832a81012a6720778b5749dd8.png" alt="b1c7bbd832a81012a6720778b5749dd8.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/e9b12eca48fb6dabd175fc4794090233.png" alt="e9b12eca48fb6dabd175fc4794090233.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/1f28731df8f5c8e63d6eccf6eb3430a6.png" alt="1f28731df8f5c8e63d6eccf6eb3430a6.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/8dba8ac8b7d7eaad708ae7c40e88735e.png" alt="8dba8ac8b7d7eaad708ae7c40e88735e.png"></p>
+<p>· XHR计算文件上传的进度：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/eeeef3b191dfc2654ee1d7324f5209e7.png" alt="eeeef3b191dfc2654ee1d7324f5209e7.png"></p>
+<p>​    2.样式需要到框架文档中复制粘贴<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/306d6ef8c29c9cde677d4a271d4fcaea.png" alt="306d6ef8c29c9cde677d4a271d4fcaea.png"><a target="_blank" rel="noopener" href="https://img.gejiba.com/image/estwO"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/e4d798aacfbd1eda2fd85fa1b1d90e90.png" alt="e4d798aacfbd1eda2fd85fa1b1d90e90.png"></a></p>
+<p>· jQuery实现文件上传：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/8a3944195c5c59466bcfdfc479d88a2e.png" alt="8a3944195c5c59466bcfdfc479d88a2e.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/cfb5abeb9aeefc6ba1e42d75c4028522.png" alt="cfb5abeb9aeefc6ba1e42d75c4028522.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/52841186ac951290c7624723e7adb0ba.png" alt="52841186ac951290c7624723e7adb0ba.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/62371173b932ed8e91dcf08d9b3670d6.png" alt="62371173b932ed8e91dcf08d9b3670d6.png"></p>
+<p>· jQuery实现loading效果：</p>
+<p>· 了解如何基于axios发起Ajax请求：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/b58006ea5652053c852a2a8e3dde9f6d.png" alt="b58006ea5652053c852a2a8e3dde9f6d.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/cb94bdfa19065a6701d6690d687bb2aa.png" alt="cb94bdfa19065a6701d6690d687bb2aa.png"></p>
+<p>-》axios是专注于网络数据请求的库，简单易用，更轻量级。</p>
+<p>-》<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/21731eb6b7ca287fa5e3cc1a464b79cc.png" alt="21731eb6b7ca287fa5e3cc1a464b79cc.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/9c0881adb63cfdbf492902697d22f586.png" alt="9c0881adb63cfdbf492902697d22f586.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/5e2292ea7d998b2d9eb79af0cbfa433f.png" alt="5e2292ea7d998b2d9eb79af0cbfa433f.png"><a target="_blank" rel="noopener" href="https://img.gejiba.com/image/es1wg"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/b16a26f659bdcf31b25f64714d1fc0b3.png" alt="b16a26f659bdcf31b25f64714d1fc0b3.png"></a><a target="_blank" rel="noopener" href="https://img.gejiba.com/image/esGK5"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/335eaef20981dd103f05c06022cf0287.png" alt="335eaef20981dd103f05c06022cf0287.png"></a></p>
+<p>· 同源：如果俩个页面的协议，域名和端口都相同，则俩个页面具有相同的源。</p>
+<p>· 同源策略：是浏览器提供的一个安全功能。</p>
+<p>· 跨域：俩个URL的协议，域名，端口不一致。出现跨域原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互。<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/d402ef981884eb0deba286552ac5b78c.png" alt="d402ef981884eb0deba286552ac5b78c.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/e23b123d88d905bb18c3c86ef100ccda.png" alt="e23b123d88d905bb18c3c86ef100ccda.png"></p>
+<p>· JSONP：是JSON的一种“使用模式”，可用于解决主流浏览器的跨域数据访问的问题。<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/7f2adf4f0b7d3786631b3a160da3a9d9.png" alt="7f2adf4f0b7d3786631b3a160da3a9d9.png"></p>
+<p>· jQuery中的JSONP函数：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/671941a05c8121f3379e34487e3d1851.png" alt="671941a05c8121f3379e34487e3d1851.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/ca6916c4e3a90aea944a09cc79b8b8d1.png" alt="ca6916c4e3a90aea944a09cc79b8b8d1.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/905323fb3a92ea1f9caa3d173b15eb10.png" alt="905323fb3a92ea1f9caa3d173b15eb10.png"></p>
+<p>· 防抖策略：当事件被触发后，延迟N秒后再执行回调，如果在这N秒内事件又被触发，则重新计时。<strong>输入框</strong><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/cdb601488f4b1d0f7071534b7220aea8.png" alt="cdb601488f4b1d0f7071534b7220aea8.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/67465091cc7025d8f9bb811f32375692.png" alt="67465091cc7025d8f9bb811f32375692.png"></p>
+<p>· 节流策略：可以减少一段时间内事件的触发频率</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/305542b722994b3e1af6a57fc1ca9205.png" alt="305542b722994b3e1af6a57fc1ca9205.png"></p>
+<p>· 通信：信息的转递和交换。三要素：主体，内容，方式</p>
+<p>· 通信协议：客户端与服务器之间要实现网页内容的传输，则通信的双方必须遵守网页内容的传输协议。其中 ，网页内容又叫超文本，因此网页内容的传输协议又叫<strong>超文本传输协议</strong>，简称<strong>HTTP协议</strong>。<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/15fa14af167e12396d7f7392d00a4251.png" alt="15fa14af167e12396d7f7392d00a4251.png"></p>
+<p>· HTTP请求消息：客户端发起的请求叫HTTP请求，客户端发送到服务器的消息，叫HTTP请求信息，又叫HTTP请求报文。</p>
+<p>-》组成部分：请求行，请求头部，空行，请求体<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/f3298a6985f4e97ffe5135f9b17f2eae.png" alt="f3298a6985f4e97ffe5135f9b17f2eae.png"></p>
+<p>-》1.请求行：请求方式，URL，HTTP协议版本，他们之间用空格隔开<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/5a20c9565a740b2800b3247173f26177.png" alt="5a20c9565a740b2800b3247173f26177.png"></p>
+<p>-》2.请求头部：用来描述客户端的基本信息，从而把客户端相关的信息告知服务器。<strong>由多行键、值对组成，每行的键和值之间用英文的冒号分隔</strong></p>
+<p>相关描述文档：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers![7258311a5c5312ddb6a192da80240bc0.png](https://img.gejiba.com/images/7258311a5c5312ddb6a192da80240bc0.png)![c4afe38dea3ab589e4498bbab3b9099c.png](https://img.gejiba.com/images/c4afe38dea3ab589e4498bbab3b9099c.png)">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers![7258311a5c5312ddb6a192da80240bc0.png](https://img.gejiba.com/images/7258311a5c5312ddb6a192da80240bc0.png)![c4afe38dea3ab589e4498bbab3b9099c.png](https://img.gejiba.com/images/c4afe38dea3ab589e4498bbab3b9099c.png)</a></p>
+<p>-》3.空行：通知服务器请求头部至此结束。</p>
+<p>请求消息中的空行，用来分隔请求头部和请求体。<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/21d5614a7bf62314fb99b9f5e5d2a20c.png" alt="21d5614a7bf62314fb99b9f5e5d2a20c.png"></p>
+<p>-》4.请求体：存放是要通过POSt方式提交到服务器的数据。<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/5db42a1f45090f7c7beea9c02acdfbf0.png" alt="5db42a1f45090f7c7beea9c02acdfbf0.png"></p>
+<p>· HTTP响应消息：服务器响应给客户端的消息内容，也叫响应报文</p>
+<p>-》组成部分：状态行，响应头部，空行，响应体<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/22615a726a86df02386e0d213681c7f9.png" alt="22615a726a86df02386e0d213681c7f9.png"></p>
+<p>-》1.状态行：HTTP协议版本，状态码，状态码的描述文本，之间用空格隔开<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/88121186bbe85311f186318afc0e86ce.png" alt="88121186bbe85311f186318afc0e86ce.png"></p>
+<p>-》2.响应头部：描述服务器的基本信息。<strong>由多行键值对组成</strong>，每行的键值之间用英文的冒号分隔开。<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/5089fbad79ce94fd554ba6eff1475582.png" alt="5089fbad79ce94fd554ba6eff1475582.png"></p>
+<p>-》3.空行：通知客户端响应头部至此结束。分隔响应头部和响应体</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers![f430472536352cbf12f379a5840dd936.png](https://img.gejiba.com/images/f430472536352cbf12f379a5840dd936.png)">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers![f430472536352cbf12f379a5840dd936.png](https://img.gejiba.com/images/f430472536352cbf12f379a5840dd936.png)</a></p>
+<p>-》4.响应体：是服务器响应给客户端的资源内容<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/985686947245412cdf67d5f01f72c19e.png" alt="985686947245412cdf67d5f01f72c19e.png"></p>
+<p>· HTTP请求方法：用来表明要对服务器上的资源执行的操作<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/0b1dbe491b31d8632912f17163152e2a.png" alt="0b1dbe491b31d8632912f17163152e2a.png"></p>
+<p>·HTTP响应状态码：用来标识响应的状态。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/6bdc6c0c81a68f1c1527a125c526cc72.png" alt="6bdc6c0c81a68f1c1527a125c526cc72.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/e23e9d6ac9a3961ddef26cb34f68c897.png" alt="e23e9d6ac9a3961ddef26cb34f68c897.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/c39c32314b958629ce95f750abf1f2f7.png" alt="c39c32314b958629ce95f750abf1f2f7.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/dbcd2a59415d7ff06b7dafed40d4cde5.png" alt="dbcd2a59415d7ff06b7dafed40d4cde5.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/24a333dcada2ef021a2d87b8c6053c6d.png" alt="24a333dcada2ef021a2d87b8c6053c6d.png"></p>
+<p>· 版本控制：本地版本控制系统》集中化的版本控制系统》分布式版本控制系统</p>
+<p>· Git三个区域：工作区，暂存区，Git仓库</p>
+<p>· Git三种状态：已修改modified,已暂存staged，已提交committed</p>
+<p>· Git工作流程：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/d906bf47443a1a32f5622acffc377eb2.png" alt="d906bf47443a1a32f5622acffc377eb2.png"></p>
+<p>· 配置Git命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#配置用户信息</span><br><span class="line">git config --global user.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮件地址&quot;</span><br><span class="line">#查看所有的全局配置项</span><br><span class="line">git config --list --global</span><br><span class="line">#查看指定的全局配置项</span><br><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br><span class="line">#获取帮助信息</span><br><span class="line">git help config</span><br><span class="line">git config -h</span><br></pre></td></tr></table></figure>
+
+<p>· 获取Git仓库的俩种方式：</p>
+<p>① 将尚未进行版本控制的本地目录转换为Git仓库</p>
+<p>② 从其他服务器克隆一个已存在的GIt仓库</p>
+<p>· 在现有目录中初始化仓库：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/e77bda40b10b2d66d405fb408cb39ac2.png" alt="e77bda40b10b2d66d405fb408cb39ac2.png"></p>
+<p>·  Git文件中的状态：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/a8d1b9b7a2c44736b90c1c4f85c8f9e1.png" alt="a8d1b9b7a2c44736b90c1c4f85c8f9e1.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/4c590b1d43174367d21b07bb599ed63f.png" alt="4c590b1d43174367d21b07bb599ed63f.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/2ceb9cc18ff41923d94f0058be1a413f.png" alt="2ceb9cc18ff41923d94f0058be1a413f.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/9bf9e40d3fd8a7df2742a4828cbe34c6.png" alt="9bf9e40d3fd8a7df2742a4828cbe34c6.png"></p>
+<p>· Git跟踪新文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add 文件名.文件后缀</span><br><span class="line">#显示文件状态</span><br><span class="line">git status</span><br><span class="line">#以精简方式显示</span><br><span class="line">git status -s</span><br></pre></td></tr></table></figure>
+
+
+
+<p>· Git提交更新文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &quot;提交内容的描述&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/530c7ecc91b320204735424aa4af29ff.png" alt="530c7ecc91b320204735424aa4af29ff.png"></p>
+<p>· Git对已提交文件进行修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git status</span><br><span class="line">git status -s</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/b8790a9d192f207901c9792936377d02.png" alt="b8790a9d192f207901c9792936377d02.png"></p>
+<p>· 暂存已修改的文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m</span><br><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/74da112f2d8021752fdbc63e1ab95972.png" alt="74da112f2d8021752fdbc63e1ab95972.png"></p>
+<p>· <strong>撤销对文件的修改</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout -- 文件名.文件后缀</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/9117ef58a9f547c5e6a1ce3671e86e08.png" alt="9117ef58a9f547c5e6a1ce3671e86e08.png"></p>
+<p>· 操作暂存区的文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#向暂存区中一次性添加多个文件</span><br><span class="line">git add .</span><br><span class="line">#取消暂存的文件</span><br><span class="line">git reset HEAD 要移除的文件名称</span><br><span class="line">#跳过使用暂存区域</span><br><span class="line">git commit -a -m &quot;描述消息&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/393ab5e028271da48bf6467916744c90.png" alt="393ab5e028271da48bf6467916744c90.png"></p>
+<p>· 移除文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#从git仓库和工作区中同时移除index.js文件</span><br><span class="line">git rm -f index.js</span><br><span class="line">#只从git仓库中移除index.css，但保留工作区中的index.css文件</span><br><span class="line">git rm --cached index.css</span><br></pre></td></tr></table></figure>
+
+<p>· Git忽略文件：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/028d48f277c0b170afcd019009c2850f.png" alt="028d48f277c0b170afcd019009c2850f.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/1f94fc96aeec5bf39730444926e83225.png" alt="1f94fc96aeec5bf39730444926e83225.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/1325a2374ffad8a52d58215590bdf35f.png" alt="1325a2374ffad8a52d58215590bdf35f.png"></p>
+<p>· 提交历史：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/be037c334df4d4348e0b8066557e44f4.png" alt="be037c334df4d4348e0b8066557e44f4.png"></p>
+<p>· 回退到指定的版本：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/0caa5c0ea066e8ad1280b6ac14af9ce2.png" alt="0caa5c0ea066e8ad1280b6ac14af9ce2.png"></p>
+<p>· 五种开源许可协议：<a target="_blank" rel="noopener" href="https://img.gejiba.com/image/eGj3g"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/56278e02e3f362924c8d152d88b408f4.png" alt="56278e02e3f362924c8d152d88b408f4.png"></a></p>
+<p>· 开源项目托管平台：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/0cf14cd06359db355289792c28be74cc.png" alt="0cf14cd06359db355289792c28be74cc.png"></p>
+<p>· 远程仓库的俩种访问方式：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/0a8fc983dd1d9de3805f597d6fd4ddac.png" alt="0a8fc983dd1d9de3805f597d6fd4ddac.png"></p>
+<p>· 基于HTTPS将本地仓库上传到Github：</p>
+<p>（需在Github上建立一个空白仓库）<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/5530e43fa1e11ce4aa33ec1680891148.png" alt="5530e43fa1e11ce4aa33ec1680891148.png"></p>
+<p>· git push命令作用：第一次推送到远程仓库用：git push -u origin master;后续就可以直接用：git push</p>
+<p>· 配置SSH并将远程仓库克隆到本地：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/e094756b8043953950c3e77e5b122e47.png" alt="e094756b8043953950c3e77e5b122e47.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/22824f5b3e687b927d3e7f28b5527977.png" alt="22824f5b3e687b927d3e7f28b5527977.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/d41e24c1372b8cce961aec16c4573448.png" alt="d41e24c1372b8cce961aec16c4573448.png"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/5ebf24b0e00cad6d6d4c47bb8b08c97c.png" alt="5ebf24b0e00cad6d6d4c47bb8b08c97c.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/83f6bb559411995aa30019a0d1731269.png" alt="83f6bb559411995aa30019a0d1731269.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/4de9e1dffc3f897ac96dc048f2aa5c76.png" alt="4de9e1dffc3f897ac96dc048f2aa5c76.png"></p>
+<p>· master主分支：在初始化本地Git仓库的时候，Git默认已经帮我们创建了一个名字叫做master的主分支。<strong>主要用来保存和记录整个项目已完成的功能代码</strong>，因此不允许程序员直接在master分子上修改代码。</p>
+<p>· 功能分支：指的是专门用来开发新功能的分支，是临时从master主分支上分叉出来的，当新功能开发且测试完毕后，最终需要合并到master主分支上</p>
+<p>· 查看分支列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p>注意：分支名字前面的*号表示当前所处的分支</p>
+<p>· 创建新分支：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch 分支名称</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/39d218921a804d797e28cec67b867c2e.png" alt="39d218921a804d797e28cec67b867c2e.png"></p>
+<p>· 切换分支：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout 分支名称</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/e526589e2c790db69188a904848dc04f.png" alt="e526589e2c790db69188a904848dc04f.png"></p>
+<p>· 分支的快速创建并切换：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名称</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/330225bebb2380d8cface4144760647d.png" alt="330225bebb2380d8cface4144760647d.png"></p>
+<p>· 合并分支：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge login</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/37773e36b720bfbd315fc9913cf5c7e7.png" alt="37773e36b720bfbd315fc9913cf5c7e7.png"></p>
+<p>· 删除分支：要先跳到主分支上，再删除分支（不能在要删除的分支上删除）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch -d 分支名称</span><br></pre></td></tr></table></figure>
+
+<p>· 遇到冲突时的分支合并：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/d737ab49d869174594278f33a49f0ce6.png" alt="d737ab49d869174594278f33a49f0ce6.png"></p>
+<p>· 将本地分支推送到远程仓库：<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/b441fae79fa1dd27a54b26507d315b4a.png" alt="b441fae79fa1dd27a54b26507d315b4a.png"></p>
+<p>· 查看远程仓库中的所有分支列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote show 远程仓库名称</span><br></pre></td></tr></table></figure>
+
+<p>· 跟踪分支：从远程仓库中，把远程分支下载到本地仓库中<img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/6086b3be15aed695ca9586d5487d01f2.png" alt="6086b3be15aed695ca9586d5487d01f2.png"></p>
+<p>· 拉取远程分支的最新代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p>· 删除远程分支：</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.gejiba.com/images/1a504ef85a62eb3cf831e8ab91658efe.png" alt="1a504ef85a62eb3cf831e8ab91658efe.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jessica</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jessica-ling12.github.io/2022/04/11/Ajax/">https://jessica-ling12.github.io/2022/04/11/Ajax/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jessica-ling12.github.io" target="_blank">Jessica☞博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Ajax/">Ajax</a></div><div class="post_share"><div class="social-share" data-image="https://s4.ax1x.com/2021/12/23/T8TCM8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/04/01/JavaScrip%E8%BF%9B%E9%98%B6/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/23/T8Tpxf.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JavaScript进阶</div></div></a></div><div class="next-post pull-right"><a href="/2022/04/16/Node.js./"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/23/T8TPsS.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Node.js基础</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81NTA3Mi8zMTU0MA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/05/oD4Zk9.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Jessica</div><div class="author-info__description">这里是Jessica的博客，欢迎您的访问~🎉</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Jessica-ling12"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Jessica-ling12" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/2537301187@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/2537301187" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Nice to meet you.<a target="_blank" rel="noopener" href="https://imgtu.com/i/TG2H3D"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/23/TG2H3D.gif" alt="TG2H3D.gif" border="0" /></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2022-4-11"><span class="toc-number">1.</span> <span class="toc-text">2022.4.11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022-4-12"><span class="toc-number">2.</span> <span class="toc-text">2022.4.12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022-4-13"><span class="toc-number">3.</span> <span class="toc-text">2022.4.13</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022-4-14"><span class="toc-number">4.</span> <span class="toc-text">2022.4.14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022-4-15"><span class="toc-number">5.</span> <span class="toc-text">2022.4.15</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/04/21/VUE2.0/" title="vue2.0"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/23/T8TCM8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue2.0"/></a><div class="content"><a class="title" href="/2022/04/21/VUE2.0/" title="vue2.0">vue2.0</a><time datetime="2022-04-20T16:00:00.000Z" title="发表于 2022-04-21 00:00:00">2022-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/16/Node.js./" title="Node.js基础"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/23/T8TPsS.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Node.js基础"/></a><div class="content"><a class="title" href="/2022/04/16/Node.js./" title="Node.js基础">Node.js基础</a><time datetime="2022-04-15T16:00:00.000Z" title="发表于 2022-04-16 00:00:00">2022-04-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/11/Ajax/" title="Ajax基础"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/23/T8TCM8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ajax基础"/></a><div class="content"><a class="title" href="/2022/04/11/Ajax/" title="Ajax基础">Ajax基础</a><time datetime="2022-04-10T16:00:00.000Z" title="发表于 2022-04-11 00:00:00">2022-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/01/JavaScrip%E8%BF%9B%E9%98%B6/" title="JavaScript进阶"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/23/T8Tpxf.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScript进阶"/></a><div class="content"><a class="title" href="/2022/04/01/JavaScrip%E8%BF%9B%E9%98%B6/" title="JavaScript进阶">JavaScript进阶</a><time datetime="2022-03-31T16:00:00.000Z" title="发表于 2022-04-01 00:00:00">2022-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/JavaScrip%E5%9F%BA%E7%A1%80/" title="JavaScript基础"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s4.ax1x.com/2021/12/23/T8TPsS.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScript基础"/></a><div class="content"><a class="title" href="/2022/03/23/JavaScrip%E5%9F%BA%E7%A1%80/" title="JavaScript基础">JavaScript基础</a><time datetime="2022-03-22T16:00:00.000Z" title="发表于 2022-03-23 00:00:00">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://s4.ax1x.com/2021/12/23/T8TCM8.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By Jessica</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">谢谢您的访问🙆‍♀️</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !false) {
+  if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,255,0" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (true) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
